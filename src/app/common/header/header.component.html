@@ -26,8 +26,8 @@
                           <li class="children">
                               <a href="javascript:void(0)" (click)="showLogin(template)" data-toggle="modal" data-target="#login-modal"> Sign In</a> 
                           </li>
-                          <li class="children">
-                              <a href="http://www.newsoftral.shaikmedical.com/signup"> Sign Up </a> 
+                          <li class="children" routerLink="/signup">
+                              <a routerLink="/signup"> Sign Up </a> 
                           </li>
 <!--                                    <li class="children">
                               <a class="post-new-btn" href="post-your-job"> POST A JOB </a> 
@@ -52,11 +52,3 @@
   </div>
 </div>
 
-<ng-template #template>
-    <div class="bd-example-modal-lg modal-common-style" id="signup" tabindex="-1" role="dialog" aria-labelledby="signupLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg margin-modal" role="document">
-            
-        </div>
-    </div>
-</ng-template>

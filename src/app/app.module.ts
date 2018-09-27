@@ -10,6 +10,7 @@ import { PrivacyPolicyComponent } from './modules/pages/privacy-policy/privacy-p
 import { RulesConditionsComponent } from './modules/pages/rules-conditions/rules-conditions.component';
 import { LoginComponent } from './common/modal/login/login.component';
 import { ModalModule  } from 'ngx-bootstrap';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
         loadChildren: './modules/pages/pages.module#PagesModule'
       },
     ]
+  },
+  {
+    path: 'signup',
+    component: SignupComponent
   }
 ];
 @NgModule({
@@ -32,7 +37,8 @@ const routes: Routes = [
     // PagesComponent,
     PrivacyPolicyComponent,
     RulesConditionsComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     ModalModule.forRoot(),

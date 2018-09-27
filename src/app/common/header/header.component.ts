@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { LoginComponent } from '../modal/login/login.component';
@@ -10,12 +10,12 @@ import { LoginComponent } from '../modal/login/login.component';
 })
 export class HeaderComponent implements OnInit {
   public bsModalRef: BsModalRef;
-  @ViewChild("template") modalElement: any;
+  
   constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
   }
-  showLogin(template: TemplateRef<any>) {
+  showLogin() {
     this.bsModalRef = this.modalService.show(LoginComponent, {  });
   }
  
