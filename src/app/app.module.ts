@@ -11,12 +11,17 @@ import { RulesConditionsComponent } from './modules/pages/rules-conditions/rules
 import { LoginComponent } from './common/modal/login/login.component';
 import { ModalModule  } from 'ngx-bootstrap';
 import { SignupComponent } from './signup/signup.component';
+import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
     component: FullLayoutComponent,
     children: [
+      {
+        path: '',
+        component: DashboardComponent
+      },
       {
         path: 'pages',
         loadChildren: './modules/pages/pages.module#PagesModule'
@@ -38,7 +43,8 @@ const routes: Routes = [
     PrivacyPolicyComponent,
     RulesConditionsComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    DashboardComponent
   ],
   imports: [
     ModalModule.forRoot(),
