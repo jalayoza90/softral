@@ -27,16 +27,27 @@
               "src/assets/css/pe-icon-7-stroke.css",
               "src/assets/css/bootstrap.custome.css",
               "src/assets/css/stylesheet.css",
-              "src/assets/css/owl.carousel.css",
-              "src/assets/css/owl.theme.css",
-              "src/assets/css/owl.transitions.css",
               "src/assets/css/responsive.css",
               "src/assets/css/menu-style.css",
               "src/assets/css/fontface-style.css",
               "src/assets/css/ie10-viewport-bug-workaround.css",  
+              "src/assets/css/owl.carousel.css",
+              "src/assets/css/owl.theme.css",
+              "src/assets/css/owl.transitions.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/js/modernizr.js",
+              "src/assets/js/jquery.min.js",
+              "src/assets/js/bootstrap.min.js",
+              "src/assets/js/holder.min.js",
+              "src/assets/js/jquery-ui.js",
+              "src/assets/js/owl.carousel.js",
+              "src/assets/js/custom.js",
+              "src/assets/js/jquery.mobile.custom.min.js",
+              "src/assets/js/main.js",
+              "src/assets/js/front/frontcommon.js"
+            ]
           },
           "configurations": {
             "production": {

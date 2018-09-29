@@ -13,6 +13,7 @@ import { ModalModule  } from 'ngx-bootstrap';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
+
 const routes: Routes = [
   {
     path: '',
