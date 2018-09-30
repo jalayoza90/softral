@@ -29,13 +29,145 @@
                           <li *ngIf="!isLogedIn" class="children" routerLink="/signup">
                               <a routerLink="/signup"> Sign Up </a> 
                           </li>
-                          <li *ngIf="isLogedIn" class="children">
-                            
-                            <a href="javascript:"> Hello User! </a> 
-                        </li>
-                        <li *ngIf="isLogedIn" class="children" routerLink="/signup">
-                            <a (click)="logout()"> Logout </a> 
-                        </li>
+                          <li *ngIf="isLogedIn" class="user-staff" style="float: right;">
+
+                                <ul>
+
+                                    <li class="user-help children">     
+
+                                        <div class="btn-group show-on-hover custom-dropdown">
+
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                <img src="http://www.newsoftral.shaikmedical.com/images/help-icon.png">
+                                            </button>
+
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li class="text-center"><a href="#"> <h4>help </h4> </a></li>
+
+                                                <li>
+                                                    <a href="#" class="user-drop-link"> Report </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="user-drop-link"> Report </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="user-drop-link"> Report </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li class="user-message children">           
+                                        <div class="btn-group custom-dropdown message-link">
+
+                                            <a href="http://www.newsoftral.shaikmedical.com/freelancer/message" class="btn btn-default dropdown-toggle"> 
+                                                <img src="http://www.newsoftral.shaikmedical.com/images/message-icon.png"><span>5</span>
+                                            </a>
+
+
+                                        </div>
+
+                                    </li>
+
+                                    <li class="user-noti children">     
+
+                                        <div class="btn-group show-on-hover custom-dropdown">
+
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">  
+                                                <img src="http://www.newsoftral.shaikmedical.com/images/notification-icon-header.png"> <span>5</span>
+                                            </button>
+
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li class="text-center"><a href="#"> <h4>Notification </h4> </a></li>
+
+                                                <li>
+                                                    <a href="#" class="user-drop-btn"> 
+                                                        <img src="http://www.newsoftral.shaikmedical.com/images/user.jpg" > <p>Lorem Ipsum is simply dummy text of the...</p>  
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="user-drop-btn"> 
+                                                        <img src="http://www.newsoftral.shaikmedical.com/images/user.jpg" > <p>Lorem Ipsum is simply dummy text of the...</p>  
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="user-drop-btn"> 
+                                                        <img src="http://www.newsoftral.shaikmedical.com/images/user.jpg" > <p>Lorem Ipsum is simply dummy text of the...</p>  
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="user-drop-btn"> 
+                                                        <img src="http://www.newsoftral.shaikmedical.com/images/user.jpg" > <p>Lorem Ipsum is simply dummy text of the...</p>  
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
+
+
+                                    </li>
+
+                                    <li class="user-drop children">          
+
+                                        <div class="btn-group show-on-hover custom-dropdown">
+
+                                            <button type="button" class="btn btn-default dropdown-toggle user-drop-btn" data-toggle="dropdown"> 
+                                                                                                <img src="http://www.newsoftral.shaikmedical.com/uploads/freelancer/1501294772pronoor logo 1.png" >  
+                                                                                                <div class="pull-left">
+                                                    <p>Hello.</p>
+                                                    <h4> 
+                                                        Shaikh 
+                                                        <span> <i class="fa fa-angle-down" aria-hidden="true"></i></span> 
+                                                    </h4>
+                                                </div>
+                                            </button>
+
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li>
+                                                    <a href="http://www.newsoftral.shaikmedical.com/client/client-profile" class="user-drop-btn">
+                                                                                                                <img src="http://www.newsoftral.shaikmedical.com/uploads/freelancer/1501294772pronoor logo 1.png" >  
+                                                                                                                <h4>Profile </h4> 
+
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="user-drop-link"> 
+                                                        <i class="pe-7s-note2"></i>  Report 
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="http://www.newsoftral.shaikmedical.com/client/update-profile" class="user-drop-link"> 
+                                                        <i class="pe-7s-settings"></i>Setting 
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="#" class="user-drop-link"> 
+                                                        <i class="pe-7s-help1"></i>Help 
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a (click)="logout()" href="javascript:" class="user-drop-link"> 
+                                                        <i class="pe-7s-switch"></i>  Log out 
+                                                    </a>
+                                                </li>
+
+
+                                            </ul>
+
+                                        </div>
+
+                                    </li>
+
+                                </ul>
+
+                            </li>
+                          
+                          
 <!--                                    <li class="children">
                               <a class="post-new-btn" href="post-your-job"> POST A JOB </a> 
                           </li>-->

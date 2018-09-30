@@ -12,8 +12,6 @@ import { FullLayoutComponent } from './full-layout/full-layout.component';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 
-import { PrivacyPolicyComponent } from './modules/pages/privacy-policy/privacy-policy.component';
-import { RulesConditionsComponent } from './modules/pages/rules-conditions/rules-conditions.component';
 import { LoginComponent } from './common/modal/login/login.component';
 import { ModalModule  } from 'ngx-bootstrap';
 import { SignupComponent } from './signup/signup.component';
@@ -61,8 +59,7 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     // PagesComponent,
-    PrivacyPolicyComponent,
-    RulesConditionsComponent,
+    
     LoginComponent,
     SignupComponent,
     DashboardComponent,

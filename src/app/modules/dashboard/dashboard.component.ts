@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-declare var $ :any;
+declare var $: any;
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -14,18 +15,37 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.forJqueryHomeBanner();
+    this.forJqueryHomeBanner().then(succ=>{
+      this.resizeScreent();
+    })
   }
-  forJqueryHomeBanner(){
-    $(window).load(function()
-    {
-      var a=$(window).height();
-      $("#hero-slider .owl-item .item > img").css({height:a});
-      $(window).resize(function()
-        {
-          var b=$(window).height();
-          $("#hero-slider .owl-item .item > img").css({height:b})
-        })
+  forJqueryHomeBanner() {
+    return new Promise((resolve, reject) => {
+      $("#hero-slider").owlCarousel({
+        autoPlay: 4000,
+        navigation: false,
+        pagination: true,
+        transitionStyle: "fade",
+        itemsTablet: [600, 0],
+        itemsMobile: [300, 0],
+        singleItem: true
+      });
+     
+      resolve(true);
+    });
+    
+   
+  }
+  
+  resizeScreent(){
+    $(window).load(function () {
+      var a = $(window).height();
+      $("#hero-slider .owl-item .item > img").css({ height: a });
+      $(window).resize(function () {
+        var b = $(window).height();
+        $("#hero-slider .owl-item .item > img").css({ height: b })
+      })
     });
   }
+ 
 }
