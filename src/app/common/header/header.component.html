@@ -23,12 +23,19 @@
                                   <input class="custom-text-box form-co form-control" name="" placeholder="" type="text">
                               </div>
                           </li>
-                          <li class="children">
+                          <li *ngIf="!isLogedIn" class="children">
                               <a href="javascript:void(0)" (click)="showLogin()" data-toggle="modal" data-target="#login-modal"> Sign In</a> 
                           </li>
-                          <li class="children" routerLink="/signup">
+                          <li *ngIf="!isLogedIn" class="children" routerLink="/signup">
                               <a routerLink="/signup"> Sign Up </a> 
                           </li>
+                          <li *ngIf="isLogedIn" class="children">
+                            
+                            <a href="javascript:"> Hello User! </a> 
+                        </li>
+                        <li *ngIf="isLogedIn" class="children" routerLink="/signup">
+                            <a (click)="logout()"> Logout </a> 
+                        </li>
 <!--                                    <li class="children">
                               <a class="post-new-btn" href="post-your-job"> POST A JOB </a> 
                           </li>-->

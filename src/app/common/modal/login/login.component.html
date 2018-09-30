@@ -4,14 +4,15 @@
                 <div class="main-message">
                     <h5>Login to Softral</h5>
                 </div>
-                <form method="POST" action="http://www.newsoftral.shaikmedical.com/signin" accept-charset="UTF-8" id="signupform1" class="signup-form"><input name="_token" type="hidden" value="phqCkKhJoz4eojzf6KJRSadu5fb2h8HNHlKhftI7">
+                <form method="POST" [formGroup]="user" action="javascript:" accept-charset="UTF-8" id="signupform1" class="signup-form"><input name="_token" type="hidden" value="phqCkKhJoz4eojzf6KJRSadu5fb2h8HNHlKhftI7">
+                    
                     <div class="form-group">
                         <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                        <input type="email" class="form-control" name='username' id="exampleInputEmail1" placeholder="Email">
+                        <input type="email" class="form-control" name='username' id="exampleInputEmail1" placeholder="Email" formControlName="email">
                     </div>
                     <div class="form-group">
                         <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                        <input type="password" name='password' class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input type="password" name='password' class="form-control" id="exampleInputPassword1" placeholder="Password" formControlName="password">
                     </div>
                     <div class="form-group">
                         <label class="keep-login">
@@ -22,7 +23,7 @@
                             </span>Keep me signed in for 2 week<a class="login-que">[?]</a></label>
                         <a class="forgot-pass" href="#">Forgot Password?</a>
                     </div>
-                    <div class="clear-full text-center btn-bottom"> <button type='submit' class="btn-green login-popup-btn">Continue</button> </div>
+                    <div class="clear-full text-center btn-bottom"> <button type='submit' class="btn-green login-popup-btn" [disabled]="!user.valid" (click)="login()">Continue</button> </div>
                     <div class="or-divi"><span>OR</span></div>
                 </form>
                 <div class="social-login-buttons">
