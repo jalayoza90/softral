@@ -18,9 +18,9 @@ import { LoginComponent } from './common/modal/login/login.component';
 import { ModalModule  } from 'ngx-bootstrap';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
-
-
-
+import { FreelancerComponent } from './modules/freelancer/freelancer.component';
+import { FindTalentComponent } from './modules/find-talent/find-talent.component';
+import { HowItWorksComponent } from './modules/how-it-works/how-it-works.component';
 
 const routes: Routes = [
   {
@@ -34,6 +34,18 @@ const routes: Routes = [
       {
         path: 'pages',
         loadChildren: './modules/pages/pages.module#PagesModule'
+      },
+      {
+        path: 'freelancer',
+        component: FreelancerComponent
+      },
+      {
+        path: 'find-talent',
+        component: FindTalentComponent
+      },
+      {
+        path: 'how-it-works',
+        component: HowItWorksComponent
       },
     ]
   },
@@ -53,7 +65,10 @@ const routes: Routes = [
     RulesConditionsComponent,
     LoginComponent,
     SignupComponent,
-    DashboardComponent
+    DashboardComponent,
+    FreelancerComponent,
+    FindTalentComponent,
+    HowItWorksComponent
   ],
   imports: [
     ModalModule.forRoot(),

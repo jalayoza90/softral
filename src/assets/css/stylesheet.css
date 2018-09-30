@@ -2792,7 +2792,7 @@ th, td, caption {
 }
 
 /***********************how-it-work****************************/
-.inner-top-banner {  background-repeat:no-repeat; background-size:cover; min-height:447px;}
+.inner-top-banner { background-color: #000; background-repeat:no-repeat; background-size:cover; min-height:447px;}
 .page-heading-wrapper {
   color: #ffffff;
   padding: 9.7% 0 0;
