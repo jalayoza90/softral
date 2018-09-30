@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.forJqueryHomeBanner().then(succ=>{
+    this.forJqueryHomeBanner().then(succ => {
       this.resizeScreent();
     })
   }
@@ -30,14 +30,50 @@ export class DashboardComponent implements OnInit {
         itemsMobile: [300, 0],
         singleItem: true
       });
-     
+      $("#testi-slider").owlCarousel({
+        autoPlay: 7000,
+        navigation: true,
+        items: 2,
+        itemsDesktop: [1199, 2],
+        itemsDesktopSmall: [979, 1],
+        itemsTablet: [600, 1],
+        itemsMobile: [300, 1],
+        afterAction: function (el) {
+          //remove class active
+          this
+            .$owlItems
+            .removeClass('active')
+
+          //add class active
+          this
+            .$owlItems //owl internal $ object containing items
+            .eq(this.currentItem + 1)
+            .addClass('active')
+        }
+      });
+
+      // clints slider script //
+      var owl = $("#clints-slider");
+      owl.owlCarousel({
+        itemsCustom: [
+          [0, 1],
+          [400, 2],
+          [600, 3],
+          [700, 4],
+          [1000, 5],
+          [1200, 5],
+          [1400, 5],
+          [1600, 5]
+        ],
+        navigation: true
+      });
       resolve(true);
     });
-    
-   
+
+
   }
-  
-  resizeScreent(){
+
+  resizeScreent() {
     $(window).load(function () {
       var a = $(window).height();
       $("#hero-slider .owl-item .item > img").css({ height: a });
@@ -47,5 +83,5 @@ export class DashboardComponent implements OnInit {
       })
     });
   }
- 
+
 }
