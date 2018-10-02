@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, RequestOptions } from '@angular/http';
+// import { Headers, Http, RequestOptions } from '@angular/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular/common/http';
+import { LocalStorageService } from './local-storage/local-storage.service';
+
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 // Import RxJs required methods
-import { Subject, Observable  } from 'rxjs';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+import { Subject, Observable, throwError } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { ToastrService } from 'ngx-toastr';
 
@@ -19,84 +21,92 @@ export class ApisService {
   private _loginCall = new Subject<any>();
   private _loginCheck = new Subject<any>();
 
-  constructor(private http: Http, private router: Router, private toastr: ToastrService) {
-      this.API_URL = environment.apiUrl;
-      this.SITE_URL = environment.SITE_URL;
+  constructor(public localStorageService: LocalStorageService, private httpClient: HttpClient, private router: Router, private toastr: ToastrService) {
+    this.API_URL = environment.apiUrl;
+    this.SITE_URL = environment.SITE_URL;
   }
 
-  /** APIs will be here **/
-  login(data, onSuccess, api = "user/adminlogin") {
-    // console.log(data);
-    this.postObserver(api, data).subscribe(res => {
-      // console.log(res);
-      if(res['secret_token']) {
-        localStorage.setItem('secret_token',res['secret_token']);
-        localStorage.setItem('id',res['user_id']);
-      }
-      onSuccess(this.successManage(res));
-    }, err => {
-      onSuccess(this.errorManage(err));
-    });
-  }
-
-  isLoggedIn(callback) {
-    let getLogedInUsersId = localStorage.getItem('id');
-    let getLogedInToken = localStorage.getItem('secret_token');
-    if(getLogedInUsersId && getLogedInToken) {
-        callback(true);
-    } else {
-        callback(false);
+  getHeader(headerOptions, qparams = {}, doNotSendAuthorizationParam) {
+    let headerParams = {};
+    if (doNotSendAuthorizationParam !== true && this.localStorageService.getSessionId()) {
+        //send authorization param
+        headerParams['x-auth-token'] = this.localStorageService.getSessionId();
     }
-  }
-
-  redirectToDashboard() {
-    this.router.navigateByUrl('/dashboard/main');
-  }
-
-  redirectToLogin() {
-    this.router.navigateByUrl('/login');
-  }
-
-  /** Observer functions **/
-  postObserver(apiurl, data): Observable<Object> {
-      return this.postApiResponse(apiurl, data);
-  }
-  getObserver(apiurl,data): Observable<Object> {
-      return this.getApiResponse(apiurl+'/'+data);
-  }
-
-  /** Responce functions **/
-  postApiResponse(url: string, data: Object): Observable<Object> {
-      let options = this.getHeaders();
-      return this.http.post(this.API_URL + url, data, options).map(res => res.json());
-  }
-  getApiResponse(url: string): Observable<Object> {
-      let options = this.getHeaders();
-      return this.http.get(this.API_URL + url, options).map(res => res.json());
-      // .catch((error: any) => Observable.throw(JSON.stringify(error) || 'Server error'));
-  }
-  getHeaders() {
-      this.token = localStorage.getItem('secret_token');
-      let headers = new Headers();
-      headers.append('x-auth-token', this.token);
-      let options = new RequestOptions({ headers: headers });
-      return options;
-  }
-
-  // Error Manager
-  errorManage(err) {
-    if(err.status == 500) {
-      err.message = err.statusText;
-    } else {
-      err.message = err.statusText;
+    if (headerOptions) {
+        headerParams = { ...headerParams, ...headerOptions }
     }
-    return err;
-  }
+    
+    headerParams['Access-Control-Allow-Origin'] = "*";
+    headerParams["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS, DELETE";
+    headerParams["Access-Control-Request-Headers"] = "*";
+    headerParams["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept,Access-Control-Allow-Headers,x-auth-token";
 
-  // Success Manager
-  successManage(suss) {
-    return suss;
-  }
+    let params: HttpParams = new HttpParams();
+    for (let key in qparams) {
+        params.set(key, qparams[key]);
+    }
+    let headers = new HttpHeaders(headerParams);
+    return headers;
+}
+
+get(url, params: any = {}, headerOptions: any = {}, doNotSendAuthorizationParam: boolean = false) {
+  params["Content-Type"]  = "application/json";
+  let httpOptions = this.getHeader(headerOptions, params, doNotSendAuthorizationParam);
+    return this.httpClient.get<any>(this.API_URL + url, { params: params, headers: httpOptions }).pipe(map(data => {
+        if (data) {
+            return data
+        } else {
+            return []
+        }
+    }), tap(),
+        catchError(this.handleError)
+    )
+}
+
+post(url, params: any = {}, headerOptions: any = {}, doNotSendAuthorizationParam: boolean = false) {
+    let httpOptions = this.getHeader(headerOptions, params, doNotSendAuthorizationParam);
+    console.log(this.API_URL + url);
+    console.log(params);
+    console.log(httpOptions);
+    return this.httpClient.post<any>(this.API_URL + url, params, { headers: httpOptions }).pipe(map(data => {
+        if (data) {
+            return data
+        } else {
+            return []
+        }
+    }), tap(), catchError(this.handleError))
+}
+
+put(url, params: any = {}, headerOptions: any = {}, doNotSendAuthorizationParam: boolean = false) {
+    let httpOptions = this.getHeader(headerOptions, params, doNotSendAuthorizationParam);
+    return this.httpClient.put<any>(this.API_URL + url, params, { headers: httpOptions }).pipe(map(data => {
+        if (data) {
+            return data
+        } else {
+            return []
+        }
+    }), tap(), catchError(this.handleError))
+}
+
+delete(url, headerOptions: any = {}, doNotSendAuthorizationParam: boolean = false) {
+    let httpOptions = this.getHeader(headerOptions, null, doNotSendAuthorizationParam);
+    return this.httpClient.delete<any>(this.API_URL + url, { headers: httpOptions })
+        .pipe(map(data => {
+            if (data) {
+                return data
+            } else {
+                return []
+            }
+        }), tap(), catchError(this.handleError))
+}
+
+public handleError(error: HttpErrorResponse) {
+    // return an observable with a user-facing error message
+    // this.toasterMessage("error",JSON.stringify(error), error.message);
+    // this.toastr.error(JSON.stringify(error), JSON.stringify(error));
+    // console.log(error.message);
+    return throwError(error.error);
+};
 
 
   // for internel emittng
@@ -104,7 +114,7 @@ export class ApisService {
     this._loginCall.next(event);
   }
 
-  get loginCall$ () {
+  get loginCall$() {
     return this._loginCall.asObservable();
   }
 
@@ -112,13 +122,16 @@ export class ApisService {
     this._loginCheck.next(event);
   }
 
-  get logggedIn$ () {
+  get logggedIn$() {
     return this._loginCheck.asObservable();
   }
 
-  toasterMessage (method, message, subject) {
-    if(method == 'success') {
+  public toasterMessage(method, message, subject) {
+    if (method == 'success') {
       this.toastr.success(message, subject);
+    }
+    if(method == "error") {
+      this.toastr.error(message, subject);
     }
   }
 }

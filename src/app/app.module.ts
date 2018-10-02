@@ -7,7 +7,8 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { ApisService } from "./services/apis.service";
-import { HttpModule } from '@angular/http';
+// import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { FullLayoutComponent } from './full-layout/full-layout.component';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
@@ -19,7 +20,8 @@ import { DashboardComponent } from './modules/dashboard/dashboard.component';
 import { FreelancerComponent } from './modules/freelancer/freelancer.component';
 import { FindTalentComponent } from './modules/find-talent/find-talent.component';
 import { HowItWorksComponent } from './modules/how-it-works/how-it-works.component';
-
+import { LocalStorageService } from './services/local-storage/local-storage.service';
+import { LoginService } from './common/modal/login/login.service';
 const routes: Routes = [
   {
     path: '',
@@ -76,7 +78,7 @@ const routes: Routes = [
         onSameUrlNavigation: 'reload'
       }
     ),
-    HttpModule,
+    HttpClientModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -84,7 +86,7 @@ const routes: Routes = [
     ToastrModule.forRoot()
   ],
   exports: [RouterModule],
-  providers: [ApisService],
+  providers: [ApisService, LocalStorageService, LoginService],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent]
 })

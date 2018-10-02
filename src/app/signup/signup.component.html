@@ -33,25 +33,25 @@
                   
               </div>
               <!--Body-->
-               <form method="POST" action="http://www.newsoftral.shaikmedical.com/signup" accept-charset="UTF-8" id="signupform1" class="signup-form" enctype="multipart/form-data"><input name="_token" type="hidden" value="phqCkKhJoz4eojzf6KJRSadu5fb2h8HNHlKhftI7">
+               <form [formGroup]="user" (ngSubmit)="onSubmit()" method="POST" action="javascript:" accept-charset="UTF-8" id="signupform1" class="signup-form" enctype="multipart/form-data"><input name="_token" type="hidden" value="phqCkKhJoz4eojzf6KJRSadu5fb2h8HNHlKhftI7">
               <div class="md-form form-group">
-                  <input type="text" id="form2" name="username" class="form-control">
-                  <label for="form2 form-group">Username</label>
+                  <input type="text" id="username" name="username" class="form-control" formControlName="username">
+                  <label for="username form-group">Username</label>
               </div>
 
               <div class="md-form form-group">
-                  <input type="text" name="email" id="form2" class="form-control">
-                  <label for="form2">Email Address</label>
+                  <input type="text" name="email" id="email" class="form-control" formControlName="email">
+                  <label for="email">Email Address</label>
               </div>
 
               <div class="md-form form-group">
-                  <input type="password" name="password" id="password" class="form-control">
+                  <input type="password" name="password" id="password" class="form-control" formControlName="password">
                   <label for="form4">Your password</label>
               </div>
 
               <div class="md-form form-group">
 
-                  <input type="password" name="cpassword" id="password_confirm" class="form-control">
+                  <input type="password" name="cpassword" id="password_confirm" class="form-control" formControlName="password">
                   <label for="form4">Re-type password</label>
               </div>
                <div class="form-group">
@@ -65,7 +65,7 @@
                               <span class="btn default btn-file">
                                   <span class="fileinput-new"> Select image </span>
                                   <span class="fileinput-exists"> Change </span>
-                                  <input type="file" name="profile_image"> </span>
+                                  <input type="file" name="profile_image" (change)="handleFileInput($event.target.files)" > </span>
                               <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
                           </div>
                       </div>
@@ -73,8 +73,8 @@
               </div>
               <div class="md-form form-group">
 
-                  <div><input type="radio" id="form43" name="usertype" value="client" checked="checked"> Client
-                  <input type="radio" name="usertype" id="form5" value="freelancer" class=""> Freelancer
+                  <div><input type="radio" id="form43" name="usertype" value="client" formControlName="usertype" checked="checked"> Client
+                  <input type="radio" name="usertype" id="form5" value="freelancer" class="" formControlName="usertype"> Freelancer
                   </div>
                   <label for="form4">Signup As</label>
               </div>
@@ -83,13 +83,13 @@
 
                   <label class="keep-login">
                       <span class="cutome-check1 cutome-3">
-                          <input name="termandc" type="checkbox" value='tandc'>
+                          <input name="termandc" type="checkbox" value='tandc' formControlName="termandc">
                           <span></span>
                       </span>Terms & conditions</label>
 
               </div>
               <div class="text-center">
-                  <button type='submit' class="btn btn-deep-purple">Sign Up</button>
+                  <button type='submit' class="btn btn-deep-purple" (click)="registerCheck()">Sign Up</button>
               </div>
                </form>
           </div>
@@ -104,7 +104,7 @@
 <footer class="site-footer">
   <div class="footer-bottom text-center">
       <div class="container">
-          <p class="copy-right">© by 2016 Fixnhour. All right &amp; reserved</p>
+          <p class="copy-right">© by {{thisYear}} Fixnhour. All right &amp; reserved</p>
       </div>
   </div>
 </footer>

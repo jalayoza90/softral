@@ -35,6 +35,7 @@
               "src/assets/css/owl.theme.css",
               "src/assets/css/owl.transitions.css",
               "node_modules/ngx-toastr/toastr.css",
+              "src/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css",
               "src/styles.css"
             ],
             "scripts": [
@@ -47,7 +48,13 @@
               "src/assets/js/custom.js",
               "src/assets/js/jquery.mobile.custom.min.js",
               "src/assets/js/main.js",
-              "src/assets/js/front/frontcommon.js"
+              "src/assets/js/front/frontcommon.js",
+              "src/assets/global/plugins/jquery-validation/js/jquery.validate.min.js",
+              "src/assets/global/plugins/jquery-validation/js/additional-methods.min.js",
+              "src/assets/global/plugins/ajaxfileupload.js",
+              "src/assets/global/plugins/jquery.form.min.js",
+              "src/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js",
+              "src/assets/js/front/signup.js"
             ]
           },
           "configurations": {
