@@ -22,6 +22,7 @@ import { FindTalentComponent } from './modules/find-talent/find-talent.component
 import { HowItWorksComponent } from './modules/how-it-works/how-it-works.component';
 import { LocalStorageService } from './services/local-storage/local-storage.service';
 import { LoginService } from './common/modal/login/login.service';
+import { RegisterService } from './signup/signup.service';
 const routes: Routes = [
   {
     path: '',
@@ -86,7 +87,7 @@ const routes: Routes = [
     ToastrModule.forRoot()
   ],
   exports: [RouterModule],
-  providers: [ApisService, LocalStorageService, LoginService],
+  providers: [ApisService, LocalStorageService, LoginService, RegisterService],
   bootstrap: [AppComponent],
   entryComponents: [LoginComponent]
 })

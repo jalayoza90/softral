@@ -1,5 +1,5 @@
 export const LocalStorageEnums = {
     loginInfo: 'token',
-    userinfo: 'userInfo',
+    userinfo: 'user',
     firstName: 'firstname'
 };

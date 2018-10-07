@@ -3,6 +3,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { LoginComponent } from '../modal/login/login.component';
 import { ApisService } from '../../services/apis.service';
+import { LocalStorageService } from '../../services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -12,10 +13,11 @@ import { ApisService } from '../../services/apis.service';
 export class HeaderComponent implements OnInit {
   public bsModalRef: BsModalRef;
   public isLogedIn = false;
-  constructor(private modalService: BsModalService, public apiService: ApisService) { }
+  public userDetail;
+  constructor(private modalService: BsModalService, public apiService: ApisService, public localStorage: LocalStorageService) { }
 
   ngOnInit() {
-    if(localStorage.getItem("token")) {
+    if(this.localStorage.getLoginInfo()) {
       this.isLogedIn = true;
     }
     this.apiService.loginCall$.forEach(event => {
@@ -27,8 +29,12 @@ export class HeaderComponent implements OnInit {
       if (event == 'loggedin') {
         this.bsModalRef.hide();
         this.apiService.toasterMessage("success", 'You are successfully Sign In!', 'Logged In!')
+        this.userDetail = this.localStorage.getUserDetails();
       }
     });
+    if(this.localStorage.getUserDetails()) {
+      this.userDetail = this.localStorage.getUserDetails();
+    }
   }
   showLogin() {
     this.bsModalRef = this.modalService.show(LoginComponent, {  });

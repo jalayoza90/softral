@@ -17,17 +17,17 @@ export class LocalStorageService {
 
   getUserDetails() {
     if (isPlatformBrowser(this.platformId)) {
-      return JSON.parse(localStorage.getItem(LocalStorageEnums.loginInfo));
+      return JSON.parse(localStorage.getItem(LocalStorageEnums.userinfo));
     }
   }
 
   setUserDetails(userInfo) {
-    return localStorage.setItem(LocalStorageEnums.loginInfo, JSON.stringify(userInfo));
+    return localStorage.setItem(LocalStorageEnums.userinfo, JSON.stringify(userInfo));
   }
 
   setLoginInfo(loginInfo) {
     if (isPlatformBrowser(this.platformId)) {
-      return localStorage.setItem(LocalStorageEnums.userinfo, JSON.stringify(loginInfo));
+      return localStorage.setItem(LocalStorageEnums.loginInfo, JSON.stringify(loginInfo));
     }
   }
   setUserName(loginInfo) {
@@ -42,7 +42,7 @@ export class LocalStorageService {
   }
   getLoginInfo() {
     if (isPlatformBrowser(this.platformId)) {
-      return JSON.parse(localStorage.getItem(LocalStorageEnums.userinfo));
+      return JSON.parse(localStorage.getItem(LocalStorageEnums.loginInfo));
     }
   }
 

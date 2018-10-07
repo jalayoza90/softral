@@ -7,6 +7,9 @@
               <li>
                   <div class="nav-menu">
                       <ul>
+                        <li *ngIf="isLogedIn" class="children visible-xs visible-sm">
+                            <a href="javascript:"> <i class="pe-7s-user"></i> Hello Shaikh </a> 
+                        </li>
                           <li class="children">
                               <a routerLink="/find-talent"> Find Talent </a>
                           </li>
@@ -14,7 +17,7 @@
                               <a routerLink="/freelancer"> Find Work </a>
                           </li>
                           <li class="children">
-                              <a routerLink="/how-it-works"> How It Works  </a> 
+                              <a routerLink="/how-it-works"> How It Works </a> 
                           </li>
                           <li class="header-search-bar mobile-hide">
                               <div class="input-group top-select-searh">
@@ -23,8 +26,11 @@
                                   <input class="custom-text-box form-co form-control" name="" placeholder="" type="text">
                               </div>
                           </li>
+                          <li *ngIf="isLogedIn" class="children visible-xs visible-sm">
+                                <a href="javascript:" (click)="logout()"> <i class="pe-7s-switch"></i>  Log out </a> 
+                            </li>
                           <li *ngIf="!isLogedIn" class="children">
-                              <a href="javascript:void(0)" (click)="showLogin()" data-toggle="modal" data-target="#login-modal"> Sign In</a> 
+                              <a href="javascript:void(0)" (click)="showLogin()" > Sign In</a> 
                           </li>
                           <li *ngIf="!isLogedIn" class="children" routerLink="/signup">
                               <a routerLink="/signup"> Sign Up </a> 

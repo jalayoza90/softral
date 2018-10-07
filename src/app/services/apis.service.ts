@@ -65,9 +65,7 @@ get(url, params: any = {}, headerOptions: any = {}, doNotSendAuthorizationParam:
 
 post(url, params: any = {}, headerOptions: any = {}, doNotSendAuthorizationParam: boolean = false) {
     let httpOptions = this.getHeader(headerOptions, params, doNotSendAuthorizationParam);
-    console.log(this.API_URL + url);
-    console.log(params);
-    console.log(httpOptions);
+    
     return this.httpClient.post<any>(this.API_URL + url, params, { headers: httpOptions }).pipe(map(data => {
         if (data) {
             return data
@@ -100,12 +98,11 @@ delete(url, headerOptions: any = {}, doNotSendAuthorizationParam: boolean = fals
         }), tap(), catchError(this.handleError))
 }
 
-public handleError(error: HttpErrorResponse) {
+public handleError(err: HttpErrorResponse) {
     // return an observable with a user-facing error message
-    // this.toasterMessage("error",JSON.stringify(error), error.message);
-    // this.toastr.error(JSON.stringify(error), JSON.stringify(error));
+    
     // console.log(error.message);
-    return throwError(error.error);
+    return throwError(err.error);
 };
 
 
