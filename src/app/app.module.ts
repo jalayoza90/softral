@@ -17,7 +17,6 @@ import { LoginComponent } from './common/modal/login/login.component';
 import { ModalModule  } from 'ngx-bootstrap';
 import { SignupComponent } from './signup/signup.component';
 import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { FreelancerComponent } from './modules/freelancer/freelancer.component';
 import { FindTalentComponent } from './modules/find-talent/find-talent.component';
 import { HowItWorksComponent } from './modules/how-it-works/how-it-works.component';
 import { LocalStorageService } from './services/local-storage/local-storage.service';
@@ -38,7 +37,7 @@ const routes: Routes = [
       },
       {
         path: 'freelancer',
-        component: FreelancerComponent
+        loadChildren: './modules/freelancer/freelancer.module#FreelancerModule'
       },
       {
         path: 'find-talent',
@@ -66,7 +65,6 @@ const routes: Routes = [
     LoginComponent,
     SignupComponent,
     DashboardComponent,
-    FreelancerComponent,
     FindTalentComponent,
     HowItWorksComponent
   ],

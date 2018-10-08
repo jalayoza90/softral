@@ -1,0 +1,40 @@
+/* 
+    Document   : jobdetail
+    Created on : Sep 17, 2017, 6:01:48 PM
+    Author     : user
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.jobdetail .first-section{
+    padding: 30px;
+}
+.jobdetail .col-md-9 .posttime{
+    line-height: 23px;
+    margin-left: 12px;
+}
+.jobdetail .second-section{
+    background: #fff;
+    border: 1px solid #c6c6c6;
+    padding: 25px;
+}
+.jobdetail .second-section .attachment-div, .jobdetail .second-section .other-skill{
+    margin-top: 30px;
+}
+.proposal .first-section{
+    padding: 30px;
+}
+.proposal .col-md-9 .posttime{
+    line-height: 23px;
+    margin-left: 12px;
+}
+.proposal .second-section, .proposal .third-section, .proposal .forth-section{
+    background: #fff;
+    border: 1px solid #c6c6c6;
+    padding: 25px;
+}
+.proposal .second-section .attachment-div, .proposal .second-section .other-skill{
+    margin-top: 30px;
+}
+.proposal .third-section,.proposal .forth-section{
+    margin-top: 30px;
+}
