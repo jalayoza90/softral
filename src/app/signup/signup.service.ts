@@ -10,4 +10,16 @@ export class RegisterService {
     register(body) {
         return this.appBaseService.post('register', body);
     }
+
+    register2(body) {
+        return this.appBaseService.post('register2', body);
+    }
+
+    cities(body) {
+        return this.appBaseService.get('get_cities_by_state/al', body);
+    }
+
+    states(body) {
+        return this.appBaseService.get('get_all_states_by_country/USA', body);
+    }
 }

@@ -40,7 +40,8 @@ export class HeaderComponent implements OnInit {
     this.bsModalRef = this.modalService.show(LoginComponent, {  });
   }
   logout() {
-    localStorage.removeItem("token");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("users");
     this.isLogedIn = false;
     this.apiService.toasterMessage("success", 'You are successfully Logged Out!', 'Logged Out!')
   }

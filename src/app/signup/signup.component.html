@@ -1,110 +1,237 @@
 <header class="site-header header-second header-login">
-  <div class="container">
-      <nav class="navbar navbar-static-top" style="margin-bottom: 0px;">
-          <div class="header-right">
-              <p>Already have an Softral Account?</p>
-              <a href="javascript:void(0)" data-toggle="modal" class="btn-green" (click)="showLogin()"> Sign In</a> 
-          </div>
-          <div class="navbar-header"> <a class="site-logo" routerLink="/"><img src="assets/images/logo-1.png" alt="Logo" style="width:165px;"></a> </div>
-      </nav>
-  </div>
+    <div class="container">
+        <nav class="navbar navbar-static-top" style="margin-bottom: 0px;">
+            <div class="header-right">
+                <p>Already have an Softral Account?</p>
+                <a href="javascript:void(0)" data-toggle="modal" class="btn-green" (click)="showLogin()"> Sign In</a>
+            </div>
+            <div class="navbar-header"> <a class="site-logo" routerLink="/"><img src="assets/images/logo-1.png" alt="Logo"
+                        style="width:165px;"></a> </div>
+        </nav>
+    </div>
 </header>
 
 <div class="clearfix"></div>
 
 <div class="min-height-footer sign-up-page coustom-bg">
-<div class="container pad-botm-30">
-<div class="signup-new">
+    <div class="container pad-botm-30">
+        <div class="signup-new">
 
-  <div class="signup-form">
-      <!--Form without header-->
-      <div class="card">
-          <div class="card-block">
+            <div class="signup-form">
+                <!--Form without header-->
+                <div class="card">
+                    <div *ngIf="step==1" class="card-block">
 
-              <!--Header-->
-              <div class="text-center">
-                  <h2 class="login-heading text-center"> Create An Account for Client</h2>
+                        <!--Header-->
+                        <div class="text-center">
+                            <h2 class="login-heading text-center"> Create Account</h2>
 
-                  <hr>
-                  <p> <a href="create-accont-freelance.html" class="coutom-link">Sign up as a Freelancer</a></p>
-              </div>
-              <div id='errorSection'>
-                  
-                  
-              </div>
-              <!--Body-->
-               <form [formGroup]="user" (ngSubmit)="onSubmit()" method="POST" action="javascript:" accept-charset="UTF-8" id="signupform1" class="signup-form" enctype="multipart/form-data"><input name="_token" type="hidden" value="phqCkKhJoz4eojzf6KJRSadu5fb2h8HNHlKhftI7">
-              <div class="md-form form-group">
-                  <input type="text" id="username" name="username" class="form-control" formControlName="username">
-                  <label for="username form-group">Username</label>
-              </div>
+                            <hr>
+                            <p> <a href="create-accont-freelance.html" class="coutom-link">Sign up as a Freelancer</a></p>
+                        </div>
+                        <div id='errorSection'>
 
-              <div class="md-form form-group">
-                  <input type="text" name="email" id="email" class="form-control" formControlName="email">
-                  <label for="email">Email Address</label>
-              </div>
 
-              <div class="md-form form-group">
-                  <input type="password" name="password" id="password" class="form-control" formControlName="password">
-                  <label for="form4">Your password</label>
-              </div>
+                        </div>
+                        <!--Body-->
+                        <form [formGroup]="user" (ngSubmit)="onSubmit()" method="POST" action="javascript:"
+                            accept-charset="UTF-8" id="signupform1" class="signup-form" enctype="multipart/form-data"><input
+                                name="_token" type="hidden" value="phqCkKhJoz4eojzf6KJRSadu5fb2h8HNHlKhftI7">
+                            <div class="md-form form-group">
+                                <input type="text" id="username" name="username" class="form-control" formControlName="username">
+                                <label for="username form-group">Username</label>
+                            </div>
 
-              <div class="md-form form-group">
+                            <div class="md-form form-group">
+                                <input type="text" name="email" id="email" class="form-control" formControlName="email">
+                                <label for="email">Email Address</label>
+                            </div>
 
-                  <input type="password" name="cpassword" id="password_confirm" class="form-control" formControlName="password">
-                  <label for="form4">Re-type password</label>
-              </div>
-               <div class="form-group">
-                  <!--<label class="control-label col-md-2"></label>-->
-                  <div class="col-md-10">
-                      <div class="fileinput fileinput-new" data-provides="fileinput">
-                          <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                              <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
-                          <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
-                          <div>
-                              <span class="btn default btn-file">
-                                  <span class="fileinput-new"> Select image </span>
-                                  <span class="fileinput-exists"> Change </span>
-                                  <input type="file" name="profile_image" (change)="handleFileInput($event.target.files)" > </span>
-                              <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> Remove </a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="md-form form-group">
+                            <div class="md-form form-group">
+                                <input type="text" name="confemail" id="confemail" class="form-control" formControlName="confemail">
+                                <label for="confemail">Verify Email Address</label>
+                            </div>
 
-                  <div><input type="radio" id="form43" name="usertype" value="client" formControlName="usertype" checked="checked"> Client
-                  <input type="radio" name="usertype" id="form5" value="freelancer" class="" formControlName="usertype"> Freelancer
-                  </div>
-                  <label for="form4">Signup As</label>
-              </div>
 
-              <div class="form-group">
 
-                  <label class="keep-login">
-                      <span class="cutome-check1 cutome-3">
-                          <input name="termandc" type="checkbox" value='tandc' formControlName="termandc">
-                          <span></span>
-                      </span>Terms & conditions</label>
+                            <div class="md-form form-group">
+                                <input type="password" name="password" id="password" class="form-control"
+                                    formControlName="password">
+                                <label for="password">Your password</label>
+                            </div>
 
-              </div>
-              <div class="text-center">
-                  <button type='submit' class="btn btn-deep-purple" (click)="registerCheck()">Sign Up</button>
-              </div>
-               </form>
-          </div>
-      </div>
-  </div>
-  <div class="clearfix"></div>
-</div>
-</div>
+                            <div class="md-form form-group">
+
+                                <input type="password" name="confpassword" id="password_confirm" class="form-control"
+                                    formControlName="confpassword">
+                                <label for="password_confirm">Re-type password</label>
+                            </div>
+
+                            <div class="md-form form-group">
+
+                                <div><input type="radio" id="form43" name="usertype" value="client" formControlName="usertype"
+                                        checked="checked"> Client
+                                    <input type="radio" name="usertype" id="form5" value="freelancer" class=""
+                                        formControlName="usertype"> Freelancer
+                                </div>
+                                <label for="form4">Signup As</label>
+                            </div>
+
+                            <div class="form-group">
+
+                                <label class="keep-login">
+                                    <span class="cutome-check1 cutome-3">
+                                        <input name="termandc" type="checkbox" value='tandc' formControlName="termandc">
+                                        <span></span>
+                                    </span>Terms & conditions</label>
+
+                            </div>
+                            <div class="text-center">
+                                <button type='submit' class="btn btn-deep-purple" (click)="registerCheck()">Sign Up</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div *ngIf="step==2" class="card-block">
+
+                        <!--Header-->
+                        <div class="text-center">
+                            <h2 class="login-heading text-center"> Create An Account for Client</h2>
+
+                            <hr>
+                            <p> <a href="create-accont-freelance.html" class="coutom-link">Sign up as a Freelancer</a></p>
+                        </div>
+                        <div id='errorSection'>
+
+
+                        </div>
+                        <!--Body-->
+                        <form [formGroup]="user2" (ngSubmit)="onSubmit2()" method="POST" action="javascript:"
+                            accept-charset="UTF-8" id="signupform2" class="signup-form" enctype="multipart/form-data"><input
+                                name="_token" type="hidden" value="phqCkKhJoz4eojzf6KJRSadu5fb2h8HNHlKhftI7">
+                            <div class="md-form form-group">
+                                <input type="text" id="firstname" name="firstname" class="form-control" formControlName="firstname">
+                                <label for="firstname">First Name</label>
+                            </div>
+
+                            <div class="md-form form-group">
+                                <input type="text" name="lastname" id="lastname" class="form-control" formControlName="lastname">
+                                <label for="lastname">Last Name</label>
+                            </div>
+
+                            <div class="md-form form-group">
+                                <label for="state">Title</label>
+                                <select name="title" id="title" class="form-control" formControlName="title">
+                                    <option value="">Please select title</option>
+                                    <option value="Mr">Mr.</option>
+                                    <option value="Mrs">Mrs.</option>
+                                    <option value="Miss">Miss</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                            <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image"
+                                                alt="" /> </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
+                                        </div>
+                                        <div>
+                                            <span class="btn default btn-file">
+                                                <span class="fileinput-new"> Select image </span>
+                                                <span class="fileinput-exists"> Change </span>
+                                                <input type="file" name="profile_image" (change)="handleFileInput($event.target.files)">
+                                            </span>
+                                            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput">
+                                                Remove </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="user1Data && user1Data.usertype == 'client' ">
+                                <div class="md-form form-group">
+                                    <input type="text" name="businessname" id="businessname" class="form-control"
+                                        formControlName="businessname">
+                                    <label for="businessname">Business Name</label>
+                                </div>
+                                <div class="md-form form-group">
+                                    <input type="text" name="businessaddress" id="businessaddress" class="form-control"
+                                        formControlName="businessaddress">
+                                    <label for="businessaddress">Business Address</label>
+                                </div>
+                            </div>
+                            <div *ngIf="stateList && stateList?.length == 0" class="md-form form-group">
+                                <input type="text" name="state" id="state" class="form-control" formControlName="state">
+                                <label for="state">State</label>
+                            </div>
+                            <div *ngIf="stateList && stateList?.length > 0" class="md-form form-group">
+                                <label for="state">State</label>
+                                <select name="state" id="state" class="form-control" formControlName="state" (change)="calledState($event.target.value)">
+                                    <option value="">Please select state</option>
+                                    <option *ngFor="let state of stateList" [value]="state.statecode">{{state.name}}</option>
+                                </select>
+                            </div>
+
+                            <div *ngIf="citiesShowList && citiesShowList?.length == 0" class="md-form form-group">
+                                <input type="text" name="city" id="city" class="form-control" formControlName="city">
+                                <label for="city">City</label>
+                            </div>
+
+                            <div *ngIf="citiesShowList && citiesShowList?.length > 0" class="md-form form-group">
+
+                                <label for="city">City</label>
+                                <select name="city" id="city" class="form-control" formControlName="city">
+                                    <option value="">Please select city</option>
+                                    <option *ngFor="let city of citiesShowList" value="{{city.id}}">{{city.city}}</option>
+                                </select>
+                            </div>
+
+                            <div class="md-form form-group">
+                                <div class="input-group phone-input">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default"><span class="type-text">+91</span>
+                                        </button>
+                                    </span>
+                                    <input type="text" name="phone" id="phone" class="form-control" placeholder="+1 (999) 999 9999"
+                                        formControlName="phone" />
+                                </div>
+                            </div>
+
+                            <div *ngIf="user1Data && user1Data.usertype == 'client' ">
+                                <div class="md-form form-group">
+                                    <div class="input-group phone-input">
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default"><span class="type-text">+91</span>
+                                            </button>
+                                        </span>
+                                        <input type="text" name="alternet_phone" id="alternet_phone" class="form-control"
+                                            placeholder="+1 (999) 999 9999" formControlName="alternet_phone" />
+                                    </div>
+                                </div>
+
+                                <div class="md-form form-group">
+                                    <input type="text" name="alternate_email" id="businessaddress" class="form-control"
+                                        formControlName="alternate_email">
+                                    <label for="alternate_email">Alternate Email</label>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type='submit' class="btn btn-deep-purple" (click)="registerCheck2()">Sign Up</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
 </div>
 <div class="clearfix"></div>
 
 <footer class="site-footer">
-  <div class="footer-bottom text-center">
-      <div class="container">
-          <p class="copy-right">© by {{thisYear}} Fixnhour. All right &amp; reserved</p>
-      </div>
-  </div>
+    <div class="footer-bottom text-center">
+        <div class="container">
+            <p class="copy-right">© by {{thisYear}} Fixnhour. All right &amp; reserved</p>
+        </div>
+    </div>
 </footer>

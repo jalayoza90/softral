@@ -22,6 +22,8 @@ import { HowItWorksComponent } from './modules/how-it-works/how-it-works.compone
 import { LocalStorageService } from './services/local-storage/local-storage.service';
 import { LoginService } from './common/modal/login/login.service';
 import { RegisterService } from './signup/signup.service';
+import { MyModalComponent } from './common/modal/my-modal/my-modal.component';
+
 const routes: Routes = [
   {
     path: '',
@@ -66,7 +68,8 @@ const routes: Routes = [
     SignupComponent,
     DashboardComponent,
     FindTalentComponent,
-    HowItWorksComponent
+    HowItWorksComponent,
+    MyModalComponent
   ],
   imports: [
     ModalModule.forRoot(),
@@ -87,6 +90,6 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [ApisService, LocalStorageService, LoginService, RegisterService],
   bootstrap: [AppComponent],
-  entryComponents: [LoginComponent]
+  entryComponents: [LoginComponent, MyModalComponent]
 })
 export class AppModule { }

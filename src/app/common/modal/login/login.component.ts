@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
       user['password'] = this.user.get('password').value;
       this.loginService.login(user).subscribe(succ => {
         if(succ) {
-          this.localStorage.setUserDetails(succ.user);
-          this.localStorage.setLoginInfo(succ.token);
+          this.localStorage.setUserDetails(succ.users);
+          this.localStorage.setLoginInfo(succ.access_token);
           this.apiService.LoginCallEvent("loggedin");
           this.result = true;
           this.apiService.LoggedInEvent("loggedin");

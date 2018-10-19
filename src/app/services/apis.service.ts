@@ -21,6 +21,9 @@ export class ApisService {
   private _loginCall = new Subject<any>();
   private _loginCheck = new Subject<any>();
 
+  private _registerCall = new Subject<any>();
+  
+
   constructor(public localStorageService: LocalStorageService, private httpClient: HttpClient, private router: Router, private toastr: ToastrService) {
     this.API_URL = environment.apiUrl;
     this.SITE_URL = environment.SITE_URL;
@@ -114,6 +117,16 @@ public handleError(err: HttpErrorResponse) {
   get loginCall$() {
     return this._loginCall.asObservable();
   }
+
+  RegisterCallEvent(event) {
+    this._registerCall.next(event);
+  }
+
+  get registerCall$() {
+    return this._registerCall.asObservable();
+  }
+
+  
 
   LoggedInEvent(event) {
     this._loginCheck.next(event);
