@@ -22,4 +22,8 @@ export class RegisterService {
     states(body) {
         return this.appBaseService.get('get_all_states_by_country/USA', body);
     }
+
+    countries(body) {
+        return this.appBaseService.get('register', body);
+    }
 }

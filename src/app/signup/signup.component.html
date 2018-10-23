@@ -25,7 +25,6 @@
                         <!--Header-->
                         <div class="text-center">
                             <h2 class="login-heading text-center"> Create Account</h2>
-
                             <hr>
                             <p> <a href="create-accont-freelance.html" class="coutom-link">Sign up as a Freelancer</a></p>
                         </div>
@@ -38,10 +37,20 @@
                             accept-charset="UTF-8" id="signupform1" class="signup-form" enctype="multipart/form-data"><input
                                 name="_token" type="hidden" value="phqCkKhJoz4eojzf6KJRSadu5fb2h8HNHlKhftI7">
                             <div class="md-form form-group">
-                                <input type="text" id="username" name="username" class="form-control" formControlName="username">
-                                <label for="username form-group">Username</label>
+                                <input type="text" id="firstname" name="firstname" class="form-control" formControlName="firstname">
+                                <label for="firstname form-group">First name</label>
                             </div>
-
+                            <div class="md-form form-group">
+                                <input type="text" id="lastname" name="lastname" class="form-control" formControlName="lastname">
+                                <label for="lastname form-group">Last name</label>
+                            </div>
+                            <div class="md-form form-group">
+                                <select name="country" id="country" class="form-control" formControlName="country">
+                                    <option value="">Please select country</option>
+                                    <option *ngFor="let country of countriesList.countries" [value]="country.id">{{country.name}}</option>
+                                </select>
+                                <label for="country">Country</label>
+                            </div>
                             <div class="md-form form-group">
                                 <input type="text" name="email" id="email" class="form-control" formControlName="email">
                                 <label for="email">Email Address</label>
@@ -52,8 +61,6 @@
                                 <label for="confemail">Verify Email Address</label>
                             </div>
 
-
-
                             <div class="md-form form-group">
                                 <input type="password" name="password" id="password" class="form-control"
                                     formControlName="password">
@@ -61,14 +68,12 @@
                             </div>
 
                             <div class="md-form form-group">
-
                                 <input type="password" name="confpassword" id="password_confirm" class="form-control"
                                     formControlName="confpassword">
                                 <label for="password_confirm">Re-type password</label>
                             </div>
 
                             <div class="md-form form-group">
-
                                 <div><input type="radio" id="form43" name="usertype" value="client" formControlName="usertype"
                                         checked="checked"> Client
                                     <input type="radio" name="usertype" id="form5" value="freelancer" class=""
@@ -78,16 +83,16 @@
                             </div>
 
                             <div class="form-group">
-
                                 <label class="keep-login">
                                     <span class="cutome-check1 cutome-3">
                                         <input name="termandc" type="checkbox" value='tandc' formControlName="termandc">
                                         <span></span>
-                                    </span>Terms & conditions</label>
+                                    </span>Terms & conditions
+                                </label>
 
                             </div>
                             <div class="text-center">
-                                <button type='submit' class="btn btn-deep-purple" (click)="registerCheck()">Sign Up</button>
+                                <button type='submit' class="btn btn-deep-purple" >Sign Up</button>
                             </div>
                         </form>
                     </div>
@@ -95,7 +100,7 @@
 
                         <!--Header-->
                         <div class="text-center">
-                            <h2 class="login-heading text-center"> Create An Account for Client</h2>
+                            <h2 class="login-heading text-center"> Step 2 </h2>
 
                             <hr>
                             <p> <a href="create-accont-freelance.html" class="coutom-link">Sign up as a Freelancer</a></p>
@@ -112,20 +117,9 @@
                                 <input type="text" id="firstname" name="firstname" class="form-control" formControlName="firstname">
                                 <label for="firstname">First Name</label>
                             </div>
-
                             <div class="md-form form-group">
                                 <input type="text" name="lastname" id="lastname" class="form-control" formControlName="lastname">
                                 <label for="lastname">Last Name</label>
-                            </div>
-
-                            <div class="md-form form-group">
-                                <label for="state">Title</label>
-                                <select name="title" id="title" class="form-control" formControlName="title">
-                                    <option value="">Please select title</option>
-                                    <option value="Mr">Mr.</option>
-                                    <option value="Mrs">Mrs.</option>
-                                    <option value="Miss">Miss</option>
-                                </select>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-10">
@@ -147,7 +141,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="user1Data && user1Data.usertype == 'client' ">
+                            <div *ngIf="user1Data && user1Data.role == 'client' ">
+                                <div class="md-form form-group">
+                                    <label for="state">Title</label>
+                                    <select name="title" id="title" class="form-control" formControlName="title">
+                                        <option value="">Please select title</option>
+                                        <option value="Mr">Mr.</option>
+                                        <option value="Mrs">Mrs.</option>
+                                        <option value="Miss">Miss</option>
+                                    </select>
+                                </div>
                                 <div class="md-form form-group">
                                     <input type="text" name="businessname" id="businessname" class="form-control"
                                         formControlName="businessname">
@@ -196,7 +199,7 @@
                                 </div>
                             </div>
 
-                            <div *ngIf="user1Data && user1Data.usertype == 'client' ">
+                            <div *ngIf="user1Data && user1Data.role == 'client' ">
                                 <div class="md-form form-group">
                                     <div class="input-group phone-input">
                                         <span class="input-group-btn">
@@ -216,7 +219,7 @@
                             </div>
 
                             <div class="text-center">
-                                <button type='submit' class="btn btn-deep-purple" (click)="registerCheck2()">Sign Up</button>
+                                <button type='submit' class="btn btn-deep-purple" >Sign Up</button>
                             </div>
                         </form>
                     </div>

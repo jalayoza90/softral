@@ -9,6 +9,7 @@ import { RegisterService } from './signup.service';
 import { MyModalComponent } from '../common/modal/my-modal/my-modal.component';  // your custom component path
 import { LocalStorageService } from '../services/local-storage/local-storage.service';
 import { ignoreElements } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 
@@ -27,16 +28,19 @@ export class SignupComponent implements OnInit {
   fileToUpload: File = null;
   citiesList = [];
   citiesShowList = [];
+  countriesList = [];
   stateList = [];
   step = 1;
-  constructor(
+  constructor( private router: Router,
     private viewRef: ViewContainerRef, private fb: FormBuilder, public apiService: ApisService, private modalService: BsModalService, public registerService: RegisterService, public localStorage: LocalStorageService) { }
 
   ngOnInit() {
     let dt = new Date();
     this.thisYear = dt.getFullYear();
     this.user = this.fb.group({
-      username: ['', Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      country: ['', Validators.required],
       email: ['', Validators.required],
       confemail: ['', Validators.required],
       password: ['', Validators.required],
@@ -59,7 +63,7 @@ export class SignupComponent implements OnInit {
 
     this.cities();
     this.states();
-
+    this.countries();
     if (this.localStorage.getItem("user_id")) {
       this.step = 2;
     }
@@ -68,11 +72,18 @@ export class SignupComponent implements OnInit {
     }
     this.apiService.registerCall$.forEach(event => {
       if (event == 'register') {
+        
         this.bsModalRef.hide();
         this.step = 2;
       }
     });
     
+  }
+  countries(){
+    // countries
+    this.registerService.countries({}).subscribe(succ => {
+      this.countriesList = succ;
+    });
   }
   cities() {
     this.registerService.cities({}).subscribe(succ => {
@@ -154,18 +165,23 @@ export class SignupComponent implements OnInit {
       errorClass: 'help-block', // default input error message class
       focusInvalid: false, // do not focus the last invalid input
       rules: {
-        username: {
+        firstname: {
           required: true
         },
-
+        lastname: {
+          required: true
+        },
         password: {
           required: true
         },
 
       },
       messages: {
-        username: {
-          required: "Username is required1."
+        firstname: {
+          required: "First name is required."
+        },
+        lastname: {
+          required: "Last name is required."
         },
         password: {
           required: "Password is required."
@@ -213,13 +229,14 @@ export class SignupComponent implements OnInit {
     let succ = this.checkPasswords();
     if (this.user.valid) {
       if (succ) {
-        user["username"] = this.user.get("username").value;
+        user["first_name"] = this.user.get("firstname").value;
+        user["last_name"] = this.user.get("lastname").value;
         user["email"] = this.user.get("email").value;
         // user["image"] = this.fileToUpload;
-        user["password"] = this.user.get("password").value,
-        user["usertype"] = this.user.get("usertype").value,
-        user["termandc"] = this.user.get("termandc").value
-
+        user["password"] = this.user.get("password").value;
+        user["role"] = this.user.get("usertype").value;
+        user["termandc"] = this.user.get("termandc").value;
+        user["country"] = this.user.get("country").value;
         this.registerService.register(user).subscribe(succ => {
           if (succ && succ.result && succ.result == "success") {
             this.openpopup();
@@ -227,11 +244,15 @@ export class SignupComponent implements OnInit {
             this.user1Data = user;
             this.localStorage.setItem("userdata", JSON.stringify(user));
             this.localStorage.setItem("user_id", succ.user_id);
+            this.user2.get("firstname").setValue(user["first_name"]);
+            this.user2.get("lastname").setValue(user["last_name"]);
           }
         }, err => {
           this.apiService.toasterMessage("error", JSON.stringify(err), "Error in Signup");
         });
       }
+    } else {
+      this.apiService.toasterMessage("error", "Please fill all required fields", "Error in Signup");
     }
   }
 
@@ -240,8 +261,8 @@ export class SignupComponent implements OnInit {
     if (this.user2.valid) {
       
 
-        user2["firstname"] = this.user2.get("firstname").value;
-        user2["lastname"] = this.user2.get("lastname").value;
+        user2["first_name"] = this.user2.get("firstname").value;
+        user2["last_name"] = this.user2.get("lastname").value;
         user2["image"] = this.fileToUpload;
         user2["state"] = this.user2.get("state").value;
         user2["city"] = this.user2.get("city").value;
@@ -250,16 +271,16 @@ export class SignupComponent implements OnInit {
 
         user2["title"] = this.user2.get("title").value;
         user2["businessaddress"] = this.user2.get("businessaddress").value;
-        user2["alternet_phone"] = this.user2.get("alternet_phone").value;
+        user2["alternate_phone"] = this.user2.get("alternet_phone").value;
         user2["alternate_email"] = this.user2.get("alternate_email").value;
         user2["businessname"] = this.user2.get("businessname").value;
 
         this.registerService.register2(user2).subscribe(succ => {
           if (succ && succ.result && succ.result == "success") {
-            this.openpopup();
-            this.apiService.toasterMessage("success", "Signup successfully", "Signup success");
+            this.apiService.toasterMessage("success", "Profile updated successfully", "Profile updated");
             this.localStorage.removeItem("user_id");
             this.localStorage.removeItem("userdata");
+            this.router.navigate(["/"]);
           }
         }, err => {
           this.apiService.toasterMessage("error", JSON.stringify(err), "Error in Signup");

@@ -35,14 +35,15 @@ export class ApisService {
         //send authorization param
         headerParams['x-auth-token'] = this.localStorageService.getSessionId();
     }
-    if (headerOptions) {
-        headerParams = { ...headerParams, ...headerOptions }
-    }
-    
     headerParams['Access-Control-Allow-Origin'] = "*";
     headerParams["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS, DELETE";
     headerParams["Access-Control-Request-Headers"] = "*";
     headerParams["Access-Control-Allow-Headers"] = "Origin, X-Requested-With, Content-Type, Accept,Access-Control-Allow-Headers,x-auth-token";
+    if (headerOptions) {
+        headerParams = { ...headerParams, ...headerOptions }
+    }
+    
+    
 
     let params: HttpParams = new HttpParams();
     for (let key in qparams) {
