@@ -26,7 +26,7 @@
                         <div class="text-center">
                             <h2 class="login-heading text-center"> Create Account</h2>
                             <hr>
-                            <p> <a href="create-accont-freelance.html" class="coutom-link">Sign up as a Freelancer</a></p>
+                            <p> <a routerLink="/signup" class="coutom-link">Sign up as a Freelancer</a></p>
                         </div>
                         <div id='errorSection'>
 
@@ -38,39 +38,39 @@
                                 name="_token" type="hidden" value="phqCkKhJoz4eojzf6KJRSadu5fb2h8HNHlKhftI7">
                             <div class="md-form form-group">
                                 <input type="text" id="firstname" name="firstname" class="form-control" formControlName="firstname">
-                                <label for="firstname form-group">First name</label>
+                                <label for="firstname form-group">First name <span class="requiredField">*</span></label>
                             </div>
                             <div class="md-form form-group">
                                 <input type="text" id="lastname" name="lastname" class="form-control" formControlName="lastname">
-                                <label for="lastname form-group">Last name</label>
+                                <label for="lastname form-group">Last name <span class="requiredField">*</span></label>
                             </div>
                             <div class="md-form form-group">
-                                <select name="country" id="country" class="form-control" formControlName="country">
+                                <select name="country" id="country" class="form-control" formControlName="country" (change)="changeCountry($event.target.value)">
                                     <option value="">Please select country</option>
                                     <option *ngFor="let country of countriesList.countries" [value]="country.id">{{country.name}}</option>
                                 </select>
-                                <label for="country">Country</label>
+                                <label for="country">Country <span class="requiredField">*</span></label>
                             </div>
                             <div class="md-form form-group">
                                 <input type="text" name="email" id="email" class="form-control" formControlName="email">
-                                <label for="email">Email Address</label>
+                                <label for="email">Email Address <span class="requiredField">*</span></label>
                             </div>
 
                             <div class="md-form form-group">
                                 <input type="text" name="confemail" id="confemail" class="form-control" formControlName="confemail">
-                                <label for="confemail">Verify Email Address</label>
+                                <label for="confemail">Verify Email Address <span class="requiredField">*</span></label>
                             </div>
 
                             <div class="md-form form-group">
                                 <input type="password" name="password" id="password" class="form-control"
                                     formControlName="password">
-                                <label for="password">Your password</label>
+                                <label for="password">Your password <span class="requiredField">*</span></label>
                             </div>
 
                             <div class="md-form form-group">
                                 <input type="password" name="confpassword" id="password_confirm" class="form-control"
                                     formControlName="confpassword">
-                                <label for="password_confirm">Re-type password</label>
+                                <label for="password_confirm">Re-type password <span class="requiredField">*</span></label>
                             </div>
 
                             <div class="md-form form-group">
@@ -79,7 +79,7 @@
                                     <input type="radio" name="usertype" id="form5" value="freelancer" class=""
                                         formControlName="usertype"> Freelancer
                                 </div>
-                                <label for="form4">Signup As</label>
+                                <label for="form4">Signup As <span class="requiredField">*</span></label>
                             </div>
 
                             <div class="form-group">
@@ -87,7 +87,7 @@
                                     <span class="cutome-check1 cutome-3">
                                         <input name="termandc" type="checkbox" value='tandc' formControlName="termandc">
                                         <span></span>
-                                    </span>Terms & conditions
+                                    </span>Terms & conditions <span class="requiredField">*</span>
                                 </label>
 
                             </div>
@@ -103,7 +103,7 @@
                             <h2 class="login-heading text-center"> Step 2 </h2>
 
                             <hr>
-                            <p> <a href="create-accont-freelance.html" class="coutom-link">Sign up as a Freelancer</a></p>
+                            <p> <a routerLink="/signup" class="coutom-link">Sign up as a Freelancer</a></p>
                         </div>
                         <div id='errorSection'>
 
@@ -115,11 +115,11 @@
                                 name="_token" type="hidden" value="phqCkKhJoz4eojzf6KJRSadu5fb2h8HNHlKhftI7">
                             <div class="md-form form-group">
                                 <input type="text" id="firstname" name="firstname" class="form-control" formControlName="firstname">
-                                <label for="firstname">First Name</label>
+                                <label for="firstname">First Name <span class="requiredField">*</span></label>
                             </div>
                             <div class="md-form form-group">
                                 <input type="text" name="lastname" id="lastname" class="form-control" formControlName="lastname">
-                                <label for="lastname">Last Name</label>
+                                <label for="lastname">Last Name <span class="requiredField">*</span></label>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-10">
@@ -143,13 +143,13 @@
                             </div>
                             <div *ngIf="user1Data && user1Data.role == 'client' ">
                                 <div class="md-form form-group">
-                                    <label for="state">Title</label>
                                     <select name="title" id="title" class="form-control" formControlName="title">
                                         <option value="">Please select title</option>
                                         <option value="Mr">Mr.</option>
                                         <option value="Mrs">Mrs.</option>
                                         <option value="Miss">Miss</option>
                                     </select>
+                                    <label for="title">Title</label>
                                 </div>
                                 <div class="md-form form-group">
                                     <input type="text" name="businessname" id="businessname" class="form-control"
@@ -162,30 +162,31 @@
                                     <label for="businessaddress">Business Address</label>
                                 </div>
                             </div>
-                            <div *ngIf="stateList && stateList?.length == 0" class="md-form form-group">
+                            <div *ngIf="stateList && stateList.length == 0" class="md-form form-group">
                                 <input type="text" name="state" id="state" class="form-control" formControlName="state">
-                                <label for="state">State</label>
+                                <label for="state">State <span class="requiredField">*</span></label>
                             </div>
-                            <div *ngIf="stateList && stateList?.length > 0" class="md-form form-group">
-                                <label for="state">State</label>
+                            <div *ngIf="stateList && stateList.length > 0" class="md-form form-group">
                                 <select name="state" id="state" class="form-control" formControlName="state" (change)="calledState($event.target.value)">
                                     <option value="">Please select state</option>
-                                    <option *ngFor="let state of stateList" [value]="state.statecode">{{state.name}}</option>
+                                    <option *ngFor="let state of stateList" [value]="state.statecode ? state.statecode : state.id">{{state.name}}</option>
                                 </select>
+                                <label for="state">State <span class="requiredField">*</span></label>
                             </div>
 
                             <div *ngIf="citiesShowList && citiesShowList?.length == 0" class="md-form form-group">
                                 <input type="text" name="city" id="city" class="form-control" formControlName="city">
-                                <label for="city">City</label>
+                                <label for="city">City <span class="requiredField">*</span></label>
                             </div>
 
                             <div *ngIf="citiesShowList && citiesShowList?.length > 0" class="md-form form-group">
 
-                                <label for="city">City</label>
+                                
                                 <select name="city" id="city" class="form-control" formControlName="city">
                                     <option value="">Please select city</option>
                                     <option *ngFor="let city of citiesShowList" value="{{city.id}}">{{city.city}}</option>
                                 </select>
+                                <label for="city">City <span class="requiredField">*</span></label>
                             </div>
 
                             <div class="md-form form-group">
@@ -197,6 +198,8 @@
                                     <input type="text" name="phone" id="phone" class="form-control" placeholder="+1 (999) 999 9999"
                                         formControlName="phone" />
                                 </div>
+                                <label for="phone">Phone Number <span class="requiredField">*</span></label>
+
                             </div>
 
                             <div *ngIf="user1Data && user1Data.role == 'client' ">
@@ -209,6 +212,7 @@
                                         <input type="text" name="alternet_phone" id="alternet_phone" class="form-control"
                                             placeholder="+1 (999) 999 9999" formControlName="alternet_phone" />
                                     </div>
+                                    <label for="alternet_phone">Alternate Phone Number</label>
                                 </div>
 
                                 <div class="md-form form-group">
@@ -219,7 +223,7 @@
                             </div>
 
                             <div class="text-center">
-                                <button type='submit' class="btn btn-deep-purple" >Sign Up</button>
+                                <button type='submit' class="btn btn-deep-purple" (click)="registerCheck2()" >Sign Up</button>
                             </div>
                         </form>
                     </div>

@@ -62,13 +62,19 @@ export class SignupComponent implements OnInit {
     });
 
     this.cities();
-    this.states();
+
+    
     this.countries();
     if (this.localStorage.getItem("user_id")) {
       this.step = 2;
     }
     if (this.localStorage.getItem("userdata")) {
       this.user1Data = JSON.parse(this.localStorage.getItem("userdata"));
+      this.states(this.user1Data.country);
+      this.user2.get("firstname").setValue(this.user1Data.first_name);
+      this.user2.get("lastname").setValue(this.user1Data.last_name);
+    } else {
+      this.states("USA");
     }
     this.apiService.registerCall$.forEach(event => {
       if (event == 'register') {
@@ -85,14 +91,24 @@ export class SignupComponent implements OnInit {
       this.countriesList = succ;
     });
   }
+  changeCountry(id){
+    this.states(id);
+  }
   cities() {
     this.registerService.cities({}).subscribe(succ => {
       this.citiesList = succ;
     });
   }
-  states() {
-    this.registerService.states({}).subscribe(succ => {
-      this.stateList = succ;
+  states(id) {
+    this.registerService.states(id, {}).subscribe(succ => {
+      if(succ.success == false) {
+        this.stateList = [];
+      } else {
+
+        this.stateList = succ;
+      }
+    }, err=>{
+      this.stateList = [];
     });
   }
   calledState(e) {
@@ -258,13 +274,16 @@ export class SignupComponent implements OnInit {
 
   onSubmit2() {
     let user2 = {};
-    if (this.user2.valid) {
-      
+    console.log(this.user2);
+    if (this.user2.valid) {      
 
         user2["first_name"] = this.user2.get("firstname").value;
         user2["last_name"] = this.user2.get("lastname").value;
-        user2["image"] = this.fileToUpload;
+        user2["image"] = this.fileToUpload && this.fileToUpload["result"] ? this.fileToUpload["result"] : null ;
         user2["state"] = this.user2.get("state").value;
+        if(typeof user2["state"] != "string") {
+          user2["state"] = "";
+        }
         user2["city"] = this.user2.get("city").value;
         user2["phone"] = this.user2.get("phone").value;
         user2["id"] = this.localStorage.getItem("user_id");
@@ -274,10 +293,10 @@ export class SignupComponent implements OnInit {
         user2["alternate_phone"] = this.user2.get("alternet_phone").value;
         user2["alternate_email"] = this.user2.get("alternate_email").value;
         user2["businessname"] = this.user2.get("businessname").value;
-
+      
         this.registerService.register2(user2).subscribe(succ => {
           if (succ && succ.result && succ.result == "success") {
-            this.apiService.toasterMessage("success", "Profile updated successfully", "Profile updated");
+            this.apiService.toasterMessage("success", "Profile updated successfully", "Success!");
             this.localStorage.removeItem("user_id");
             this.localStorage.removeItem("userdata");
             this.router.navigate(["/"]);
@@ -287,7 +306,12 @@ export class SignupComponent implements OnInit {
         });
       
     } else {
-      this.apiService.toasterMessage("error", JSON.stringify(this.user2.valid), "Error in Signup");
+      this.apiService.toasterMessage("error", "Please fill all required fields", "Error in Signup");
     }
+  }
+
+  ngOnDestroy(){
+    this.localStorage.removeItem("user_id");
+    this.localStorage.removeItem("userdata");
   }
 }
