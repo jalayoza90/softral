@@ -259,7 +259,11 @@ export class SignupComponent implements OnInit {
             
             this.user1Data = user;
             this.localStorage.setItem("userdata", JSON.stringify(user));
-            this.localStorage.setItem("user_id", succ.user_id);
+            if(succ.user_profile) {
+              this.localStorage.setItem("user_id", succ.user_profile.user_id);
+            } else {
+              this.localStorage.setItem("user_id", succ.user_id);
+            }
             this.user2.get("firstname").setValue(user["first_name"]);
             this.user2.get("lastname").setValue(user["last_name"]);
           }
