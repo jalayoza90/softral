@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.forJqueryHomeBanner().then(succ => {
       this.resizeScreent();
-    })
+    });
   }
   forJqueryHomeBanner() {
     return new Promise((resolve, reject) => {

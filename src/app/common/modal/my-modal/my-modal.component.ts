@@ -8,6 +8,7 @@ import { ApisService } from '../../../services/apis.service';
 })
 export class MyModalComponent implements OnInit {
   result = false;
+  message : String;
   constructor(public apiService: ApisService) {
     
   }

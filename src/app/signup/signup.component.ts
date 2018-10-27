@@ -32,7 +32,9 @@ export class SignupComponent implements OnInit {
   stateList = [];
   step = 1;
   constructor( private router: Router,
-    private viewRef: ViewContainerRef, private fb: FormBuilder, public apiService: ApisService, private modalService: BsModalService, public registerService: RegisterService, public localStorage: LocalStorageService) { }
+    private viewRef: ViewContainerRef, private fb: FormBuilder, public apiService: ApisService, private modalService: BsModalService, public registerService: RegisterService, public localStorage: LocalStorageService) {
+      // modalService
+    }
 
   ngOnInit() {
     let dt = new Date();
@@ -119,8 +121,9 @@ export class SignupComponent implements OnInit {
       }
     }
   }
-  openpopup() {
+  openpopup(msg) {
     this.bsModalRef = this.modalService.show(MyModalComponent, {});
+    this.bsModalRef.content.message = msg;
   }
 
   showLogin() {
@@ -255,20 +258,28 @@ export class SignupComponent implements OnInit {
         user["country"] = this.user.get("country").value;
         this.registerService.register(user).subscribe(succ => {
           if (succ && succ.result && succ.result == "success") {
-            this.openpopup();
             
             this.user1Data = user;
             this.localStorage.setItem("userdata", JSON.stringify(user));
             if(succ.user_profile) {
               this.localStorage.setItem("user_id", succ.user_profile.user_id);
+              this.step = 2;
             } else {
               this.localStorage.setItem("user_id", succ.user_id);
+              this.openpopup(succ.message);
             }
+            
             this.user2.get("firstname").setValue(user["first_name"]);
             this.user2.get("lastname").setValue(user["last_name"]);
           }
         }, err => {
-          this.apiService.toasterMessage("error", JSON.stringify(err), "Error in Signup");
+          let message;
+          if(err.message) {
+            message = err.message;
+          } else {
+            message = "Something went wrong";
+          }
+          this.apiService.toasterMessage("error", message, "Error in Signup");
         });
       }
     } else {
