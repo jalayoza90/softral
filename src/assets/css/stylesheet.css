@@ -2611,7 +2611,7 @@ input[type=text]:focus:not([readonly]) + label,
 .attached-files {
   padding: 20px 0 10px;
 }
-.main-message h5 { font-size:26px; color:#555555; font-family: 'MyriadPro-Regular'; color:#40cbca; text-align:center; letter-spacing:0.2px;}
+.main-message h5 { font-size:22px; color:#555555; font-family: 'MyriadPro-Regular'; color:#40cbca; text-align:center; letter-spacing:0.2px;}
 .login-popup form { padding:20px 0 0 }
 #login-modal .modal-dialog {
   margin: 76px auto;

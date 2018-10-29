@@ -34,6 +34,15 @@ export class SignupComponent implements OnInit {
   constructor( private router: Router,
     private viewRef: ViewContainerRef, private fb: FormBuilder, public apiService: ApisService, private modalService: BsModalService, public registerService: RegisterService, public localStorage: LocalStorageService) {
       // modalService
+      this.apiService.logggedIn$.forEach(event => {
+        if (event == 'loggedin') {
+          this.bsModalRef.hide();
+          // cd-nav-trigger
+          this.apiService.toasterMessage("success", 'You are successfully Sign In!', 'Logged In!');
+          this.router.navigate(["/"]);
+          // this.userDetail = this.localStorage.getUserDetails();
+        }
+      });
     }
 
   ngOnInit() {
@@ -311,13 +320,13 @@ export class SignupComponent implements OnInit {
       
         this.registerService.register2(user2).subscribe(succ => {
           if (succ && succ.result && succ.result == "success") {
-            this.apiService.toasterMessage("success", "Profile updated successfully", "Success!");
+            this.apiService.toasterMessage("success", succ.message, "Success!");
             this.localStorage.removeItem("user_id");
             this.localStorage.removeItem("userdata");
             this.router.navigate(["/"]);
           }
         }, err => {
-          this.apiService.toasterMessage("error", JSON.stringify(err), "Error in Signup");
+          this.apiService.toasterMessage("error", err.message, "Error in Signup");
         });
       
     } else {
