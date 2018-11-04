@@ -28,15 +28,17 @@ export class LoginComponent implements OnInit {
       user['email'] = this.user.get('email').value;
       user['password'] = this.user.get('password').value;
       this.loginService.login(user).subscribe(succ => {
-        if(succ) {
-          this.localStorage.setUserDetails(succ.users);
+        if(succ && !succ.error) {
+          this.localStorage.setUserDetails(succ.user);
           this.localStorage.setLoginInfo(succ.access_token);
           this.apiService.LoginCallEvent("loggedin");
           this.result = true;
           this.apiService.LoggedInEvent("loggedin");
         } else {
-          this.apiService.toasterMessage("error", JSON.stringify(succ), "Error in login");
+          this.apiService.toasterMessage("error", succ.message, "Error in login");
         }
+      }, err=>{
+        this.apiService.toasterMessage("error", err.message, "Error in login");
       })
       
     }

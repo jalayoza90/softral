@@ -20,7 +20,7 @@ export class ApisService {
   // for internal emit
   private _loginCall = new Subject<any>();
   private _loginCheck = new Subject<any>();
-
+  private _loaderCall = new Subject<any>();
   private _registerCall = new Subject<any>();
   
 
@@ -136,6 +136,16 @@ public handleError(err: HttpErrorResponse) {
   get logggedIn$() {
     return this._loginCheck.asObservable();
   }
+
+  LoaderEvent(event) {
+    this._loaderCall.next(event);
+  }
+
+  get loaderCall$() {
+    return this._loaderCall.asObservable();
+  }
+
+  
 
   public toasterMessage(method, message, subject) {
     if (method == 'success') {

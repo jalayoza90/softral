@@ -155,6 +155,16 @@ export class SignupComponent implements OnInit {
           required: true
         },
 
+        state: {
+          required: true
+        },
+        city: {
+          required: true
+        },
+        phone: {
+          required: true
+        },
+
       },
       messages: {
         firstname: {
@@ -162,11 +172,18 @@ export class SignupComponent implements OnInit {
         },
         lastname: {
           required: "Last name is required."
+        },
+        state: {
+          required: "State is required."
+        },
+        city: {
+          required: "City is required."
+        },
+        phone: {
+          required: "Phone Number is required."
         }
       },
-      invalidHandler: function (event, validator) { //display error alert on form submit   
-        $('.alert-danger', $('.login-form')).show();
-      },
+      
       highlight: function (element) { // hightlight error inputs
         $(element)
           .closest('.form-group').addClass('has-error'); // set error class to the control group
@@ -175,19 +192,12 @@ export class SignupComponent implements OnInit {
         $(element)
           .closest('.form-group').removeClass('has-error');
         //label.remove();
-      },
-      errorPlacement: function (error, element) {
-        error.insertAfter(element.closest('.input-icon'));
-      },
-      submitHandler: function (form) {
-        $(form).submit();
-
       }
-
+      
     });
   }
   registerCheck() {
-
+    
     $('#signupform1').validate({
       errorElement: 'span', //default input error message container
       errorClass: 'help-block', // default input error message class
@@ -202,6 +212,21 @@ export class SignupComponent implements OnInit {
         password: {
           required: true
         },
+        confpassword: {
+          required: true
+        },
+        country: {
+          required: true
+        },
+        email: {
+          required: true
+        },
+        confemail: {
+          required: true
+        },
+        termandc: {
+          required: true
+        }
 
       },
       messages: {
@@ -213,11 +238,24 @@ export class SignupComponent implements OnInit {
         },
         password: {
           required: "Password is required."
+        },
+        confpassword: {
+          required: "Confirm Password is required."
+        },
+        email: {
+          required: "Email is required."
+        },
+        confemail: {
+          required: "Confirm Email is required."
+        },
+        country: {
+          required: "Country is required."
+        },
+        termandc: {
+          required: "Term and Condition is required."
         }
       },
-      invalidHandler: function (event, validator) { //display error alert on form submit   
-        $('.alert-danger', $('.login-form')).show();
-      },
+      
       highlight: function (element) { // hightlight error inputs
         $(element)
           .closest('.form-group').addClass('has-error'); // set error class to the control group
@@ -227,14 +265,7 @@ export class SignupComponent implements OnInit {
           .closest('.form-group').removeClass('has-error');
         //label.remove();
       },
-      errorPlacement: function (error, element) {
-        error.insertAfter(element.closest('.input-icon'));
-      },
-      submitHandler: function (form) {
-        $(form).submit();
-
-      }
-
+      
     });
   }
   checkPasswords() { // here we have the 'passwords' group
@@ -245,7 +276,7 @@ export class SignupComponent implements OnInit {
       this.apiService.toasterMessage("error", "Password did not match", "Password fail!");
     } else if (this.user.get("email").value !== this.user.get("confemail").value) {
       validate = false;
-      this.apiService.toasterMessage("error", "Email address did not match", "Password fail!");
+      this.apiService.toasterMessage("error", "Email address did not match", "Email address fail!");
     } else {
       validate = true;
     }
@@ -265,9 +296,10 @@ export class SignupComponent implements OnInit {
         user["role"] = this.user.get("usertype").value;
         user["termandc"] = this.user.get("termandc").value;
         user["country"] = this.user.get("country").value;
+        this.apiService.LoaderEvent("show");
         this.registerService.register(user).subscribe(succ => {
           if (succ && succ.result && succ.result == "success") {
-            
+            this.apiService.LoaderEvent("hide");
             this.user1Data = user;
             this.localStorage.setItem("userdata", JSON.stringify(user));
             if(succ.user_profile) {
@@ -282,6 +314,7 @@ export class SignupComponent implements OnInit {
             this.user2.get("lastname").setValue(user["last_name"]);
           }
         }, err => {
+          this.apiService.LoaderEvent("hide");
           let message;
           if(err.message) {
             message = err.message;
@@ -298,7 +331,7 @@ export class SignupComponent implements OnInit {
 
   onSubmit2() {
     let user2 = {};
-    console.log(this.user2);
+    
     if (this.user2.valid) {      
 
         user2["first_name"] = this.user2.get("firstname").value;
@@ -317,8 +350,9 @@ export class SignupComponent implements OnInit {
         user2["alternate_phone"] = this.user2.get("alternet_phone").value;
         user2["alternate_email"] = this.user2.get("alternate_email").value;
         user2["businessname"] = this.user2.get("businessname").value;
-      
+        this.apiService.LoaderEvent("show");
         this.registerService.register2(user2).subscribe(succ => {
+          this.apiService.LoaderEvent("hide");
           if (succ && succ.result && succ.result == "success") {
             this.apiService.toasterMessage("success", succ.message, "Success!");
             this.localStorage.removeItem("user_id");
@@ -326,6 +360,7 @@ export class SignupComponent implements OnInit {
             this.router.navigate(["/"]);
           }
         }, err => {
+          this.apiService.LoaderEvent("hide");
           this.apiService.toasterMessage("error", err.message, "Error in Signup");
         });
       

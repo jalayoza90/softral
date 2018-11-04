@@ -85,14 +85,14 @@
                             <div class="form-group">
                                 <label class="keep-login">
                                     <span class="cutome-check1 cutome-3">
-                                        <input name="termandc" type="checkbox" value='tandc' formControlName="termandc">
+                                        <input id="termandc" name="termandc" type="checkbox" value='tandc' formControlName="termandc">
                                         <span></span>
                                     </span>Terms & conditions <span class="requiredField">*</span>
                                 </label>
 
                             </div>
                             <div class="text-center">
-                                <button type='submit' class="btn btn-deep-purple" >Sign Up</button>
+                                <button type='submit' class="btn btn-deep-purple" (click)="registerCheck()" >Sign Up</button>
                             </div>
                         </form>
                     </div>
@@ -223,7 +223,7 @@
                             </div>
 
                             <div class="text-center">
-                                <button type='submit' class="btn btn-deep-purple" (click)="registerCheck2()" >Sign Up</button>
+                                <button type='submit' class="btn btn-deep-purple" (click)="registerCheck2()" >Submit</button>
                             </div>
                         </form>
                     </div>

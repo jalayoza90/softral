@@ -14,11 +14,14 @@ export class HeaderComponent implements OnInit {
   public bsModalRef: BsModalRef;
   public isLogedIn = false;
   public userDetail;
+  public first_name = "";
   constructor(private modalService: BsModalService, public apiService: ApisService, public localStorage: LocalStorageService) { }
 
   ngOnInit() {
-    if(this.localStorage.getLoginInfo()) {
+    if(this.localStorage.getLoginInfo()) {  
+      
       this.isLogedIn = true;
+      
     }
     this.apiService.loginCall$.forEach(event => {
       if (event == 'loggedin') {
@@ -34,8 +37,11 @@ export class HeaderComponent implements OnInit {
         this.userDetail = this.localStorage.getUserDetails();
       }
     });
-    if(this.localStorage.getUserDetails()) {
-      this.userDetail = this.localStorage.getUserDetails();
+    if(this.localStorage.getItem("user") && this.localStorage.getUserDetails()) {
+      // if(this.localStorage.getUserDetails()) {
+        this.isLogedIn = true;                                                                                                          
+        this.userDetail = this.localStorage.getUserDetails();
+      // }
     }
   }
   showLogin() {
@@ -44,7 +50,7 @@ export class HeaderComponent implements OnInit {
   }
   logout() {
     localStorage.removeItem("access_token");
-    localStorage.removeItem("users");
+    localStorage.removeItem("user");
     this.isLogedIn = false;
     $(".cd-nav-trigger").click();
     this.apiService.toasterMessage("success", 'You are successfully Logged Out!', 'Logged Out!')

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApisService } from './services/apis.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,14 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'softral';
-  constructor(private router: Router){
-    
+  loader = 'hide';
+  constructor(public apiService: ApisService, private router: Router){
+    apiService.loaderCall$.forEach(event => {
+      if (event == 'show') {
+        this.loader = '';
+      } else {
+        this.loader = 'hide';
+      }
+    });
   }
 }

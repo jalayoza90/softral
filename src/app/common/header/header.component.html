@@ -3,12 +3,13 @@
       <header class="cd-main-header">
           <a class="cd-logo" routerLink="/"><img src="http://www.newsoftral.shaikmedical.com/assets/images/logo-1.png" alt="Logo" style="width:165px;padding-top: 12px"></a>
           <nav class="cd-nav">
+              
           <ul id="cd-primary-nav" class="cd-primary-nav is-fixed">
               <li>
                   <div class="nav-menu">
                       <ul>
-                        <li *ngIf="isLogedIn" class="children visible-xs visible-sm">
-                            <a href="javascript:"> <i class="pe-7s-user"></i> Hello Shaikh </a> 
+                        <li *ngIf="isLogedIn" class="children visible-xs visible-sm titlecase">
+                            <a href="javascript:"> <i class="pe-7s-user"></i> Hello {{userDetail.first_name}}</a> 
                         </li>
                           <li class="children">
                               <a routerLink="/find-talent"> Find Talent </a>
@@ -121,11 +122,11 @@
                                         <div class="btn-group show-on-hover custom-dropdown">
 
                                             <button type="button" class="btn btn-default dropdown-toggle user-drop-btn" data-toggle="dropdown"> 
-                                                                                                <img src="http://www.newsoftral.shaikmedical.com/uploads/freelancer/1501294772pronoor logo 1.png" >  
+                                                                                                <img src="assets/images/telant-user-img.jpg" >  
                                                                                                 <div class="pull-left">
-                                                    <p>Hello.</p>
-                                                    <h4> 
-                                                        Shaikh 
+                                                    <p>Hello </p>
+                                                    <h4 class="titlecase"> 
+                                                        {{userDetail.first_name}} 
                                                         <span> <i class="fa fa-angle-down" aria-hidden="true"></i></span> 
                                                     </h4>
                                                 </div>
@@ -135,7 +136,7 @@
 
                                                 <li>
                                                     <a href="http://www.newsoftral.shaikmedical.com/client/client-profile" class="user-drop-btn">
-                                                                                                                <img src="http://www.newsoftral.shaikmedical.com/uploads/freelancer/1501294772pronoor logo 1.png" >  
+                                                                                                                <img src="assets/images/telant-user-img.jpg" >  
                                                                                                                 <h4>Profile </h4> 
 
                                                     </a>
