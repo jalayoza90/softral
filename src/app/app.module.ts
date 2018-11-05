@@ -49,6 +49,10 @@ const routes: Routes = [
         path: 'how-it-works',
         component: HowItWorksComponent
       },
+      {
+        path: 'user',
+        loadChildren: './modules/user/user.module#UserModule'
+      },
     ]
   },
   {

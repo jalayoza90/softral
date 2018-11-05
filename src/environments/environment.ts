@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   apiUrl: 'http://softral.aimsusa.net/api/public/api/',
-  SITE_URL: 'http://localhost:4200/'
+  SITE_URL: 'http://localhost:4200/',
+  BASE_URL: "http://softral.aimsusa.net/api/public" 
 };
 
 /*

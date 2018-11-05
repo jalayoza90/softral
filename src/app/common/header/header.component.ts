@@ -4,6 +4,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { LoginComponent } from '../modal/login/login.component';
 import { ApisService } from '../../services/apis.service';
 import { LocalStorageService } from '../../services/local-storage/local-storage.service';
+import { environment } from '../../../environments/environment';
 declare var $: any;
 @Component({
   selector: 'app-header',
@@ -15,6 +16,7 @@ export class HeaderComponent implements OnInit {
   public isLogedIn = false;
   public userDetail;
   public first_name = "";
+  public baseUrl = environment.BASE_URL;
   constructor(private modalService: BsModalService, public apiService: ApisService, public localStorage: LocalStorageService) { }
 
   ngOnInit() {
@@ -35,6 +37,7 @@ export class HeaderComponent implements OnInit {
         // cd-nav-trigger
         this.apiService.toasterMessage("success", 'You are successfully Sign In!', 'Logged In!')
         this.userDetail = this.localStorage.getUserDetails();
+        console.log(this.userDetail);
       }
     });
     if(this.localStorage.getItem("user") && this.localStorage.getUserDetails()) {

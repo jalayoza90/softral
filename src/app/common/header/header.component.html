@@ -122,7 +122,9 @@
                                         <div class="btn-group show-on-hover custom-dropdown">
 
                                             <button type="button" class="btn btn-default dropdown-toggle user-drop-btn" data-toggle="dropdown"> 
-                                                                                                <img src="assets/images/telant-user-img.jpg" >  
+                                                
+                                                                                                <img src="{{baseUrl + userDetail.avatar}}" onError="this.src='assets/images/telant-user-img.jpg';" />
+                                                                                                  
                                                                                                 <div class="pull-left">
                                                     <p>Hello </p>
                                                     <h4 class="titlecase"> 
@@ -136,7 +138,7 @@
 
                                                 <li>
                                                     <a href="http://www.newsoftral.shaikmedical.com/client/client-profile" class="user-drop-btn">
-                                                                                                                <img src="assets/images/telant-user-img.jpg" >  
+                                                                                                                <img src="{{baseUrl + userDetail.avatar}}" onError="this.src='assets/images/telant-user-img.jpg';"  >  
                                                                                                                 <h4>Profile </h4> 
 
                                                     </a>
